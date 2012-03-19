@@ -3,10 +3,10 @@ require File.expand_path('../lib/bootlace/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Will Farrington"]
-  gem.email         = ["wcfarrington@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.email         = ["will@highgroove.com"]
+  gem.description   = %q{Simple gem for bootstrapping Ruby applications}
+  gem.summary       = %q{A simple gem for bootstrapping Ruby applications based upon the GitHub script/bootstrap model, but with a tiny DSL on top.}
+  gem.homepage      = "https://github.com/highgroove/bootlace"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

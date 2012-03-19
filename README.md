@@ -1,6 +1,9 @@
 # Bootlace
 
-TODO: Write a gem description
+A simple gem for bootstrapping Ruby applications based upon the GitHub script/bootstrap model, but with a tiny DSL on top.
+
+Right now it's very lightweight, and the DSL is expected to change as we use it on more projects and find we need to revise
+how we're doing things.
 
 ## Installation
 
@@ -20,6 +23,8 @@ Or install it yourself as:
 
 You may use Bootlace stand-alone or integrated with Rails.
 
+Create a `script/bootstrap` file in your app that looks like so:
+
 ```
 #!/bin/env ruby
 
@@ -28,8 +33,9 @@ include Bootlace
 
 package mac: "redis", ubuntu: "redis-server"
 
-rake 'db:create', environment: { "RAILS_ENV" => "test" }
+bundler
 
+rake 'db:create', environment: { "RAILS_ENV" => "test" }
 ```
 
 ## Contributing
