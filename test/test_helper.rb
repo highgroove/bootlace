@@ -8,6 +8,10 @@ ENV["TEST"] = "true"
 module TestHelpers
   require 'active_support/core_ext/kernel'
 
+  def last_log
+    IO.readlines("/tmp/bootlace.log").last
+  end
+
   def with_constants(constants, &block)
     saved_constants = {}
     constants.each do |constant, val|

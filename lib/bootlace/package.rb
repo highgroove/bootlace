@@ -1,20 +1,12 @@
-require 'logger'
+require_relative 'logger'
 require_relative 'os'
 
 module Bootlace
   module Package
     include Bootlace::OS
+    include Bootlace::Logger
 
-    attr_reader :noop, :logger
-
-    def initialize
-      if ENV["TEST"]
-        @logger = ::Logger.new('/tmp/bootlace.log')
-      else
-        @logger = ::Logger.new(STDOUT)
-      end
-      set_logger_format
-    end
+    attr_reader :noop
 
     def noop!
       @noop = true
@@ -53,12 +45,6 @@ module Bootlace
     end
 
     private
-    def set_logger_format
-      logger.formatter = proc do |severity, datetime, progname, msg|
-          "[#{progname}] #{severity}: #{msg}\n"
-      end
-    end
-
     def package_manager
       {
         mac: 'brew',

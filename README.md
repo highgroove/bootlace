@@ -28,6 +28,7 @@ include Bootlace
 
 package mac: "redis", ubuntu: "redis-server"
 
+rake 'db:create', environment: { "RAILS_ENV" => "test" }
 
 ```
 

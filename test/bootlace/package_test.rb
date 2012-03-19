@@ -17,11 +17,6 @@ class PackageTest < Test::Unit::TestCase
 
   def after_setup_hook
   end
-
-  private
-  def last_log
-    IO.readlines("/tmp/bootlace.log").last
-  end
 end
 
 class NoopPackageTest < PackageTest
