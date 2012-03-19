@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('mocha')
   gem.add_development_dependency('activesupport')
   gem.add_development_dependency('turn')
+  gem.add_development_dependency('pry')
 end

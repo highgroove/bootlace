@@ -7,14 +7,17 @@ module Bootlace
 
     attr_reader :noop, :logger
 
-    def initialize_logger
-      @logger ||= ::Logger.new(STDOUT)
+    def initialize
+      if ENV["TEST"]
+        @logger = ::Logger.new('/tmp/bootlace.log')
+      else
+        @logger = ::Logger.new(STDOUT)
+      end
       set_logger_format
     end
 
     def noop!
       @noop = true
-      @logger = ::Logger.new('/tmp/bootlace.log')
       set_logger_format
     end
 
@@ -41,6 +44,12 @@ module Bootlace
     end
 
     def install_package(name)
+      system [
+        os == :mac ? "" : "sudo",
+        package_manager,
+        "install",
+        name
+      ].join(" ").strip
     end
 
     private
@@ -53,8 +62,8 @@ module Bootlace
     def package_manager
       {
         mac: 'brew',
-        ubuntu: 'apt',
-        debian: 'apt',
+        ubuntu: 'apt-get',
+        debian: 'apt-get',
         centos: 'yum'
       }.fetch(os)
     end

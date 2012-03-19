@@ -1,6 +1,9 @@
 require 'test/unit'
 require 'mocha'
 require 'turn'
+require 'pry'
+
+ENV["TEST"] = "true"
 
 module TestHelpers
   require 'active_support/core_ext/kernel'

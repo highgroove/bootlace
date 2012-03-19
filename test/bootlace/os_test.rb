@@ -44,7 +44,7 @@ class OsTest < Test::Unit::TestCase
     end
   end
 
-  def test_when_linux_but_unsupported
+  def test_os_linux_unsupported
     with_constants RUBY_PLATFORM: 'linux' do
       File.expects(:exist?).with('/etc/redhat-release').returns(false)
       File.expects(:exist?).with('/etc/debian_version').returns(false)
