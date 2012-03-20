@@ -4,14 +4,12 @@ module Bootlace
   module Logger
     attr_reader :logger
 
-    def initialize
-      if ENV["TEST"]
-        @logger = ::Logger.new('/tmp/bootlace.log')
-      else
-        @logger = ::Logger.new(STDOUT)
-      end
-      set_logger_format
+    if ENV["TEST"]
+      @logger = ::Logger.new('/tmp/bootlace.log')
+    else
+      @logger = ::Logger.new(STDOUT)
     end
+    set_logger_format
 
     private
     def set_logger_format
