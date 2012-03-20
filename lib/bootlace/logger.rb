@@ -10,7 +10,7 @@ module Bootlace
       end
 
       @logger.formatter = proc do |severity, datetime, progname, msg|
-        "[#{progname}] #{severity}: #{msg}\n"
+        "[bootlace] #{severity}: #{msg}\n"
       end
 
       @logger
