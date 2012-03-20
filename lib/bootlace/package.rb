@@ -10,31 +10,44 @@ module Bootlace
 
     def noop!
       @noop = true
-      set_logger_format
     end
 
     def package(arg)
       case arg.class.name
       when "String"
-        case os
-        when :mac
-          if noop
-            logger.info("Would have installed package '#{arg}' via #{package_manager}")
-          else
-            logger.info("Installing package '#{arg}' via #{package_manager}")
-            install_package arg
-          end
-        end
+        install_package_from_string arg
       when "Hash"
-        if noop
-          logger.info("Would have installed package '#{arg[os]}' via #{package_manager}")
-        else
-          logger.info("Installing package '#{arg[os]}' via #{package_manager}")
-          install_package arg[os]
-        end
+        install_package_from_hash arg
       end
     end
 
+    def install_package_from_string(s)
+      unless package_installed? s
+        if noop
+          logger.info("Would have installed package '#{s}' via #{package_manager}")
+        else
+          logger.info("Installing package '#{s}' via #{package_manager}")
+          install_package s
+        end
+      else
+        logger.info("Package '#{s}' already installed; skipping")
+      end
+    end
+
+    def install_package_from_hash(hash)
+      unless package_installed? hash[os]
+        if noop
+          logger.info("Would have installed package '#{hash[os]}' via #{package_manager}")
+        else
+          logger.info("Installing package '#{hash[os]}' via #{package_manager}")
+          install_package hash[os]
+        end
+      else
+        logger.info("Package '#{hash[os]}' already installed; skipping")
+      end
+    end
+
+    private
     def install_package(name)
       system [
         os == :mac ? "" : "sudo",
@@ -44,7 +57,20 @@ module Bootlace
       ].join(" ").strip
     end
 
-    private
+    def package_installed?(name)
+      case os
+      when :mac
+        system "brew list | grep #{name} > /dev/null"
+      when :ubuntu
+        system "sudo aptitude show #{name} | grep installed > /dev/null"
+      when :debian
+        system "sudo aptitude show #{name} | grep installed > /dev/null"
+      when :centos
+        system "sudo yum list #{name} | grep installed > /dev/null"
+      end
+      $? == 0 ? true : false
+    end
+
     def package_manager
       {
         mac: 'brew',
