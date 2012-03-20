@@ -14,7 +14,7 @@ module Bootlace
       end
 
       logger.info("Executing rake task '#{task}'")
-      system "#{detect_bundle} rake #{task}".strip
+      system "#{detect_bundle} rake -s #{task}".strip
     end
 
     private
