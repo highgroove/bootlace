@@ -1,6 +1,6 @@
 # Bootlace
 
-A simple gem for bootstrapping Ruby applications based upon the GitHub script/bootstrap model, but with a tiny DSL on top.
+A simple gem for getting your development (or other) environments setup quickly!  Efficiently bootstrap Ruby applications based upon the GitHub script/bootstrap model, but with a clean DSL on top.
 
 Right now it's very lightweight, and the DSL is expected to change as we use it on more projects and find we need to revise
 how we're doing things.
