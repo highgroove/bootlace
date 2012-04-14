@@ -6,9 +6,19 @@ require "bootlace/rake"
 require "bootlace/bundler"
 
 module Bootlace
-  include Bootlace::OS
-  include Bootlace::Logger
-  include Bootlace::Package
-  include Bootlace::Rake
-  include Bootlace::Bundler
+  class Base
+    include Bootlace::OS
+    include Bootlace::Logger
+    include Bootlace::Package
+    include Bootlace::Rake
+    include Bootlace::Bundler
+  end
+
+  def self.base
+    @base ||= Bootlace::Base.new
+  end
+  
+  def self.strap_up
+    yield base if block_given?
+  end
 end

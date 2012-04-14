@@ -29,13 +29,12 @@ Create a `script/bootstrap` file in your app that looks like so:
 #!/bin/env ruby
 
 require 'bootlace'
-include Bootlace
 
-package mac: "redis", ubuntu: "redis-server"
-
-bundler
-
-rake 'db:create', environment: { "RAILS_ENV" => "test" }
+Bootlace.strap_up do |b|
+  b.package mac: "redis", ubuntu: "redis-server"
+  b.bundler
+  b.rake 'db:create', environment: { "RAILS_ENV" => "test" }
+end
 ```
 
 ## Contributing
