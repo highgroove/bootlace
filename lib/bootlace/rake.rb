@@ -10,7 +10,7 @@ module Bootlace
       }.merge(o)
 
       options[:environment].each do |key,val|
-        ENV[key] = val
+        ENV[key.to_s] = val.to_s
       end
 
       logger.info("Executing rake task '#{task}'")

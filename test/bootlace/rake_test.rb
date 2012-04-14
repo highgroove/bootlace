@@ -33,4 +33,10 @@ class RakeTest < Test::Unit::TestCase
     bootstrap.rake "foo:bar:baz", environment: { "SOMEOPT" => "SET" }
     assert_equal "SET", ENV['SOMEOPT']
   end
+
+  def test_sets_symbolized_env_variables
+    bootstrap.stubs(:system).returns(0)
+    bootstrap.rake "foo:bar:baz", environment: { SOMEOPT: "SET" }
+    assert_equal "SET", ENV['SOMEOPT']
+  end
 end

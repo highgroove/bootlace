@@ -33,7 +33,7 @@ require 'bootlace'
 Bootlace.strap_up do |b|
   b.package mac: "redis", ubuntu: "redis-server"
   b.bundler
-  b.rake 'db:create', environment: { "RAILS_ENV" => "test" }
+  b.rake 'db:create', environment: { RAILS_ENV: "test" }
 end
 ```
 
