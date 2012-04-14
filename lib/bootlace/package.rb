@@ -6,12 +6,6 @@ module Bootlace
     include Bootlace::OS
     include Bootlace::Logger
 
-    attr_reader :noop
-
-    def noop!
-      @noop = true
-    end
-
     def package(arg)
       case arg.class.name
       when "String"
@@ -23,12 +17,8 @@ module Bootlace
 
     def install_package_from_string(s)
       unless package_installed? s
-        if noop
-          logger.info("Would have installed package '#{s}' via #{package_manager}")
-        else
-          logger.info("Installing package '#{s}' via #{package_manager}")
-          install_package s
-        end
+        logger.info("Installing package '#{s}' via #{package_manager}")
+        install_package s
       else
         logger.info("Package '#{s}' already installed; skipping")
       end
@@ -36,12 +26,8 @@ module Bootlace
 
     def install_package_from_hash(hash)
       unless package_installed? hash[os]
-        if noop
-          logger.info("Would have installed package '#{hash[os]}' via #{package_manager}")
-        else
-          logger.info("Installing package '#{hash[os]}' via #{package_manager}")
-          install_package hash[os]
-        end
+        logger.info("Installing package '#{hash[os]}' via #{package_manager}")
+        install_package hash[os]
       else
         logger.info("Package '#{hash[os]}' already installed; skipping")
       end

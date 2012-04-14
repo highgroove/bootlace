@@ -11,37 +11,9 @@ class PackageTest < Test::Unit::TestCase
   attr_accessor :bootstrap
 
   def setup
-    @bootstrap      = BootstrapPackage.new
-    after_setup_hook
+    @bootstrap = BootstrapPackage.new
   end
 
-  def after_setup_hook
-  end
-end
-
-class NoopPackageTest < PackageTest
-  def after_setup_hook
-    bootstrap.noop!
-    bootstrap.stubs(:package_installed?).returns(false)
-  end
-
-  def test_package_without_hash_defaults_to_current_platform
-    bootstrap.package 'redis'
-    assert_match /Would have installed package 'redis' via brew/, last_log
-  end
-
-  def test_accepts_hash_of_package_names
-    bootstrap.stubs(:os).returns(:mac)
-    bootstrap.package mac: 'redis', ubuntu: 'redis-server'
-    assert_match /Would have installed package 'redis' via brew/, last_log
-
-    bootstrap.stubs(:os).returns(:ubuntu)
-    bootstrap.package mac: 'redis', ubuntu: 'redis-server'
-    assert_match /Would have installed package 'redis-server' via apt-get/, last_log
-  end
-end
-
-class RealPackageTest < PackageTest
   def test_package_without_hash_defaults_to_current_platform
     bootstrap.stubs(:os).returns(:mac)
     bootstrap.stubs(:package_installed?).returns(false)
