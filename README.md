@@ -21,11 +21,9 @@ Or install it yourself as:
 
 ## Usage
 
-You may use Bootlace stand-alone or integrated with Rails.
-
 Create a `script/bootstrap` file in your app that looks like so:
 
-```
+```ruby
 #!/bin/env ruby
 
 require 'bootlace'
@@ -34,6 +32,29 @@ Bootlace.strap_up do |b|
   b.package mac: "redis", ubuntu: "redis-server"
   b.bundler
   b.rake 'db:create', environment: { RAILS_ENV: "test" }
+end
+```
+
+### Rails
+
+Bootlace provides a simple, opinionated helper to help simplify the
+process of bootstrapping a typical Rails application.
+
+The snippet below will:
+
+* Run bundler if needed
+* Create the db
+* Load the schema
+* Seed the db
+* Prepare the test database
+
+```ruby
+#!/bin/env ruby
+
+require 'bootlace'
+
+Bootlace.strap_up do |b|
+  b.rails
 end
 ```
 

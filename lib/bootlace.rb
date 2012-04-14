@@ -12,6 +12,14 @@ module Bootlace
     include Bootlace::Package
     include Bootlace::Rake
     include Bootlace::Bundler
+
+    def rails
+      bundler
+      rake 'db:create'
+      rake 'db:schema:load'
+      rake 'db:seed'
+      rake 'db:test:prepare'
+    end
   end
 
   def self.base
