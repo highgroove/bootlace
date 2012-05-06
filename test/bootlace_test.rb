@@ -1,7 +1,7 @@
 require File.expand_path("../../lib/bootlace", __FILE__)
-require_relative 'test_helper.rb'
+require 'test_helper'
 
-class BootlaceTest < Test::Unit::TestCase
+class BootlaceTest < MiniTest::Unit::TestCase
   include TestHelpers
 
   def test_reality

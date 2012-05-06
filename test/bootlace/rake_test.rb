@@ -5,7 +5,7 @@ class BootstrapRake
   include Bootlace::Rake
 end
 
-class RakeTest < Test::Unit::TestCase
+class RakeTest < MiniTest::Unit::TestCase
   include TestHelpers
 
   attr_accessor :bootstrap

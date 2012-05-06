@@ -1,6 +1,6 @@
-require 'test/unit'
+require 'minitest/autorun'
+require 'minitest/display'
 require 'mocha'
-require 'turn'
 require 'pry'
 
 ENV["TEST"] = "true"

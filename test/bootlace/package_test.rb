@@ -5,7 +5,7 @@ class BootstrapPackage
   include Bootlace::Package
 end
 
-class PackageTest < Test::Unit::TestCase
+class PackageTest < MiniTest::Unit::TestCase
   include TestHelpers
   
   attr_accessor :bootstrap

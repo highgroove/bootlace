@@ -5,7 +5,7 @@ class BootstrapBundler
   include Bootlace::Bundler
 end
 
-class BundlerTest < Test::Unit::TestCase
+class BundlerTest < MiniTest::Unit::TestCase
   include TestHelpers
 
   attr_accessor :bootstrap

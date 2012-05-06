@@ -5,7 +5,7 @@ class BootstrapOS
   include Bootlace::OS
 end
 
-class OsTest < Test::Unit::TestCase
+class OsTest < MiniTest::Unit::TestCase
   include TestHelpers
   
   attr_accessor :bootstrap
